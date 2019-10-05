@@ -1,82 +1,63 @@
 # ---------------------------------------------------------------------------------------
 # Licença   : MIT - Copyright 2019 Viniciusalopes (Vovolinux) <suporte@vovolinux.com.br>
-# Criado em : 03/10/2019
+# Criado em : 02/10/2019
 # Projeto   : Bhaskara em Python - Matemática e Estatística
 # Finalidade: Apresentação em sala de aula
-# Temas     : - Fórmula de Bhaskara
-# ---------------------------------------------------------------------------------------
 #                           |                               |
 #   Fórmula de Bhaskara:    |   Restrições de entrada       |   Restrições de saída
 #             ___________   |       a != 0                  |   Δ < 0 : {}
-#   x = -b +-√ b² - 4.a.c   | Não é uma equação de 2º grau. |   Δ = 0 : {X} onde X' = X"
+#   x = -b +-√ b² - 4.a.c   | Não é uma equação de 2º grau  |   Δ = 0 : {X'= X"}
 #       -----------------   |                               |   Δ > 0 : {X',X"}
 #              2.a          |                               |
 #              
-# IMPLEMENTE EM PYTHON O ALGORITMO PARA CALCULAR O VALOR DE X COM BHASKARA:
-#
-#   INICIO-ALGORITMO
-#   |   DECLARE a, b, c, x1, x2, delta
-#   |
-#   |   LEIA(b)
-#   |   ESCREVA("Informe um valor para A: ")
-#   |   LEIA(a)
-#   |
-#   |   ENQUANTO (Verdadeiro)
-#   |   |   LEIA(a)
-#   |   |   SE(a.pode_ser_número) ENTÃO:
-#   |   |   |   a <- tipo_numérico(a)
-#   |   |   |   SE (a = 0) ENTÃO:
-#   |   |   |   |   ESCREVA("O valor de A não pode ser 0 (zero).")
-#   |   |   |   SENÃO:
-#   |   |   |   |   Falso // Pare o laço while
-#   |   |   |   FIM-SE
-#   |   |   FIM-SE
-#   |   |
-#   |   |   ESCREVA("Valor inválido para A.")
-#   |   |   ESCREVA("Informe um valor para A: ")
-#   |   |   LEIA(a)
-#   |   FIM-ENQUANTO
-#   |
-#   |   ESCREVA("Informe um valor para B: ")
-#   |   LEIA(b)
-#   |
-#   |   ESCREVA("Informe um valor para C: ")
-#   |   LEIA(c)
-#   |
-#   |   delta <- b²-4*a*c
-#   |
-#   |   ESCREVA("delta", delta)
-#   |
-#   |   SE(delta < 0) ENTÃO:
-#   |   |   ESCREVA("A equação não possui raízes reais.")
-#   |   SENÃO:           ___________
-#   |   |   x1 <- -b + (√ b² - 4.a.c) / (2.a)
-#   |   |   SE(delta = 0) ENTÃO:
-#   |   |   |   ESCREVA("X' = X" = ", x1)
-#   |   |   SENÃO:           __________
-#   |   |   |   x1 <- -b - (√b² - 4.a.c) / (2.a)
-#   |   |   |   ESCREVA("X' = ", x1)
-#   |   |   |   ESCREVA("X" = ", x2)
-#   |   |   FIM-SE
-#   |   FIM-SE
-#   FIM-ALGORITMO
-#
-#
+# ---------------------------------------------------------------------------------------
 
-# Entrada
-a = int(input('Informe um valor para A: '))
+# FONTES DE PESQUISA: 
+# https://python.org
+# https://python.org.br
+# https://www.w3schools.com/python/
+
+# Entrada de A
+a = input('Informe um valor para A: ')
+
+# Validação de A
+while True:
+    if a.replace('-','').isnumeric():   # Testa possível conversão da 'str' para um número
+        # Converte o dado armazenado na variável 'a'
+        a = int(a)
+        if a == 0:
+            print('\nO valor de A não pode ser 0 (zero).')
+        else:
+            break
+
+    print('Valor inválido para A.\n')
+    a = input('Informe um valor para A: ')
+        
+# Entrada de B
 b = int(input('Informe um valor para B: '))
+
+# Entrada de C
 c = int(input('Informe um valor para C: '))
 
-# Processamento
+# Delta
 delta = b ** 2 - 4 * a * c
-x1 = (-b + delta ** 0.5) / (2 * a)
-x2 = (-b - delta ** 0.5) / (2 * a)
 
-# Saída
-print('delta=', delta)
-print('x1=', x1)
-print('x2= {}'.format(x2))
+print('Δ = {}'.format(delta))
 
-# Boa Sorte!
-# Próximo arquivo: estruturas.py
+# Possibilidades de x
+if delta < 0:
+    print('A equação não possui raízes reais.')
+else:   
+    # delta >= 0
+    x1 = (-b + delta ** 0.5) / (2 * a)
+    if delta == 0:
+        print("X' = X\" = ", x1)
+    else:
+        # x > 0
+        x2 = (-b - delta ** 0.5) / (2 * a)
+        print("X' = {:.2f}\nX\" = {:.2f}".format(x1, x2))
+
+# Finalizando
+print('-' * 8, '\nThe fim.')
+
+
